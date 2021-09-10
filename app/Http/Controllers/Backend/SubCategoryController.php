@@ -106,4 +106,42 @@ class SubCategoryController extends Controller
             ->orderBy('subcategory_name_en', 'ASC')->get();
         return json_encode($subcat);
     }
+
+    public function SubSubCategoryStore(Request $request)
+    {
+        $request->validate([
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'subsubcategory_name_en' => 'required',
+            'subsubcategory_name_hin' => 'required',
+        ], [
+            'category_id.required' => 'Please select Any option',
+            'subcategory_id.required' => 'Please select Any option',
+            'subsubcategory_name_en.required' => 'Input SubSubCategory English Name',
+            'subsubcategory_name_hin.required' => 'Input SubSubCategory Hindi Name'
+        ]);
+
+        SubSubCategory::insert([
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'subsubcategory_name_en' => $request->subsubcategory_name_en,
+            'subsubcategory_name_hin' => $request->subsubcategory_name_hin,
+            'subsubcategory_slug_en' => strtolower(str_replace(' ', '-', $request->subsubcategory_name_en)),
+            'subsubcategory_slug_hin' => str_replace(' ', '-', $request->subsubcategory_name_hin),
+        ]);
+        $notification = array(
+            'message' => 'Sub-SubCategory Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function SubSubCategoryEdit($id)
+    {
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        $subcategories = SubCategory::orderBy('subcategory_name_en', 'ASC')->get();
+        $subsubcategories = subSubCategory::findOrFail($id);
+        return view('backend.category.sub_subcategory_edit', compact('categories', 'subcategories',  'subsubcategories'));
+    }
 }
