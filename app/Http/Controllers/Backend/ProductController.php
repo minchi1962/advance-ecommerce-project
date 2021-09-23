@@ -250,4 +250,38 @@ class ProductController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    public function ProductDelete($id)
+    {
+        $product = Product::findOrFail($id);
+        unlink($product->product_thambnail);
+        Product::findOrFail($id)->delete();
+
+        $images = MultiImg::where('product_id', $id)->get();
+        foreach ($images as $img) {
+            unlink($img->photo_name);
+            MultiImg::where('product_id', $id)->delete();
+        }
+        $notification = array(
+            'message' => 'Product Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function ProductDetail($id)
+    {
+        $multiImgs = MultiImg::where('product_id', $id)->get();
+        $categories = Category::latest()->get();
+        $brands = Brand::latest()->get();
+        $subcategory = SubCategory::latest()->get();
+        $subsubcategory = SubSubCategory::latest()->get();
+        $products = Product::findOrFail($id);
+
+        return view(
+            'backend.product.product_detail',
+            compact('categories', 'brands', 'subcategory', 'subsubcategory', 'products', 'multiImgs')
+        );
+    }
 }
