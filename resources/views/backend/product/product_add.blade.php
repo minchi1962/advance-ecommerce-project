@@ -305,8 +305,8 @@
                                                     <div class="controls">
                                                         <textarea id="editor1" name="long_descp_en" rows="10" cols="80"
                                                             required=''>
-                                                                                                                                                                                                                                                                        Long Description English.
-                                                                                                                                                                                                                                                                         </textarea>
+                                                                                                                                                                                                                                                                                Long Description English.
+                                                                                                                                                                                                                                                                                 </textarea>
                                                     </div>
                                                 </div>
                                             </div> {{-- end col-md-6 --}}
@@ -316,8 +316,8 @@
                                                     <div class="controls">
                                                         <textarea id="editor2" name="long_descp_hin" rows="10" cols="80"
                                                             required=''>
-                                                                                                                                                                                                                                                                        Long Description Hindi.
-                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                Long Description Hindi.
+                                                                                                                                                                                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div> {{-- end col-md-6 --}}
@@ -349,7 +349,7 @@
                                                     <label for="checkbox_4">Special Offers</label>
                                                 </fieldset>
                                                 <fieldset>
-                                                    <input type="checkbox" id="checkbox_5" name="special_deals" value="y">
+                                                    <input type="checkbox" id="checkbox_5" name="special_deals" value="1">
                                                     <label for="checkbox_5">Special Deals</label>
                                                 </fieldset>
                                             </div>
