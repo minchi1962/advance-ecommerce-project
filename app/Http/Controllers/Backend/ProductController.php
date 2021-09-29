@@ -270,18 +270,18 @@ class ProductController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function ProductDetail($id)
-    {
-        $multiImgs = MultiImg::where('product_id', $id)->get();
-        $categories = Category::latest()->get();
-        $brands = Brand::latest()->get();
-        $subcategory = SubCategory::latest()->get();
-        $subsubcategory = SubSubCategory::latest()->get();
-        $products = Product::findOrFail($id);
+    // public function ProductDetail($id)
+    // {
+    //     $multiImgs = MultiImg::where('product_id', $id)->get();
+    //     $categories = Category::latest()->get();
+    //     $brands = Brand::latest()->get();
+    //     $subcategory = SubCategory::latest()->get();
+    //     $subsubcategory = SubSubCategory::latest()->get();
+    //     $products = Product::findOrFail($id);
 
-        return view(
-            'backend.product.product_detail',
-            compact('categories', 'brands', 'subcategory', 'subsubcategory', 'products', 'multiImgs')
-        );
-    }
+    //     return view(
+    //         'backend.product.product_detail',
+    //         compact('categories', 'brands', 'subcategory', 'subsubcategory', 'products', 'multiImgs')
+    //     );
+    // }
 }

@@ -98,7 +98,6 @@ Route::prefix('product')->group(function () {
     Route::get('/inactive/{id}', [ProductController::class, 'ProductInactive'])->name('product.inactive');
     Route::get('/active/{id}', [ProductController::class, 'ProductActive'])->name('product.active');
     Route::get('/delete/{id}', [ProductController::class, 'ProductDelete'])->name('product.delete');
-    Route::get('/detail/{id}', [ProductController::class, 'ProductDetail'])->name('product.detail');
 });
 
 // Admin Slider Routes
@@ -139,3 +138,7 @@ Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdat
 
 Route::get('/language/hindi', [LanguageController::class, 'Hindi'])->name('hindi.language');
 Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
+
+// Front end Product detail URL
+
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
