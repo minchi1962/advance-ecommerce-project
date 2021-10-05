@@ -119,8 +119,36 @@ class IndexController extends Controller
     public function ProductDetails($id, $slug)
     {
         $product = Product::findOrFail($id);
+        $color_en = $product->product_color_en;
+        $product_color_en = explode(',', $color_en);
+        $color_hin = $product->product_color_hin;
+        $product_color_hin = explode(',', $color_hin);
+
+        $size_en = $product->product_size_en;
+        $product_size_en = explode(',', $size_en);
+        $size_hin = $product->product_size_hin;
+        $product_size_hin = explode(',', $size_hin);
+
+        $cat_id = $product->category_id;
+        $relatedProduct = Product::where('category_id', $cat_id)
+            ->where('id', '!=', $id)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+
         $multiImag = MultiImg::where('product_id', $id)->get();
-        return view('frontend.product.product_details', compact('product', 'multiImag'));
+        return view(
+            'frontend.product.product_details',
+            compact(
+                'product',
+                'multiImag',
+                'product_color_en',
+                'product_color_hin',
+                'product_size_en',
+                'product_size_hin',
+                'relatedProduct'
+            )
+        );
     }
 
     public function TagWiseProduct($tag)
@@ -133,5 +161,24 @@ class IndexController extends Controller
 
         $categories = Category::orderBy('category_name_en', 'ASC')->get();
         return view('frontend.tags.tags_view', compact('products', 'categories'));
+    }
+
+    public function SubCatWiseProduct($subcat_id, $slug)
+    {
+        $products = Product::where('status', 1)
+            ->where('subcategory_id', $subcat_id)
+            ->orderBy('id', 'DESC')->paginate(6);
+
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        return view('frontend.product.subcategory_view', compact('products', 'categories'));
+    }
+    public function SubSubCatWiseProduct($subsubcat_id, $slug)
+    {
+        $products = Product::where('status', 1)
+            ->where('subsubcategory_id', $subsubcat_id)
+            ->orderBy('id', 'DESC')->paginate(6);
+
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
+        return view('frontend.product.sub_subcategory_view', compact('products', 'categories'));
     }
 }

@@ -145,3 +145,10 @@ Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDeta
 
 // Fronrend Product Tags Page
 Route::get('/product/tags/{tag}', [IndexController::class, 'TagWiseProduct']);
+
+// Frontend SubCategory wise Data
+Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
+
+// Frontend SubSubcategory wise data
+
+Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'SubSubCatWiseProduct']);
